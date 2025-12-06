@@ -29,6 +29,12 @@
       --content-max-width: 1120px;
     }
 
+    html {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
@@ -37,7 +43,19 @@
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      overflow-x: hidden; /* 防止 320px 出現水平捲動 */
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;           /* 防止 320px 水平溢出 */
+      overflow-wrap: break-word;    /* 長字串自動斷行 */
+    }
+
+    .page,
+    .site-header,
+    .main,
+    .section,
+    .section-inner,
+    .footer {
+      max-width: 100%;
     }
 
     .page {
@@ -65,9 +83,10 @@
     }
 
     .container {
+      width: 100%;
       max-width: var(--content-max-width);
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 1.25rem;           /* 稍微縮小左右 padding，避免極小寬度貼邊 */
     }
 
     .nav {
@@ -76,6 +95,7 @@
       align-items: flex-start;
       gap: 0.75rem;
       padding: 0.9rem 0 0.95rem;
+      max-width: 100%;
     }
 
     .nav-main {
@@ -96,6 +116,7 @@
       align-items: center;
       gap: 0.4rem;
       max-width: 100%;
+      flex-wrap: wrap;              /* 320px 時允許品牌名稱與標籤換行 */
     }
 
     .nav-brand-mark {
@@ -120,7 +141,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.3rem 0.8rem;
-      margin-left: 0; /* 移除負邊距避免 320px 溢出 */
+      margin-left: 0;               /* 移除負邊距，避免在 320px 溢出 */
+      max-width: 100%;
     }
 
     .nav-link {
@@ -190,6 +212,7 @@
       align-items: center;
       gap: 0.28rem;
       max-width: 100%;
+      flex-wrap: wrap;              /* 讓長文字在 320px 自動換行 */
       line-height: 1.4;
     }
 
@@ -209,6 +232,7 @@
     .main {
       flex: 1 1 auto;
       padding-bottom: 3rem;
+      max-width: 100%;
     }
 
     .section {
@@ -319,6 +343,7 @@
       border: 1px solid transparent;
       transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .btn-primary {
@@ -537,6 +562,7 @@
       border-bottom: 1px dashed rgba(56, 189, 248, 0.6);
       padding-bottom: 0.03rem;
       transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+      word-break: break-all;        /* 讓網址在 320px 也能斷行，避免撐寬 */
     }
 
     .contact-link:hover {
@@ -582,6 +608,7 @@
       padding-bottom: 0.03rem;
       opacity: 0.9;
       transition: color var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
+      word-break: break-all;        /* 避免 footer 連結造成水平溢出 */
     }
 
     .footer-link:hover {
